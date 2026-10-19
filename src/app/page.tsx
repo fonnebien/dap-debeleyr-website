@@ -1,95 +1,111 @@
-import { AnnouncementPopup } from '@/components/announcement-popup/AnnouncementPopup';
-import { Card } from '@/components/card/Card';
+import { AnnouncementBanner } from '@/components/announcement-banner/AnnouncementBanner';
+import { CallBar } from '@/components/call-bar/CallBar';
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
+import { AlertIcon, MailIcon, PhoneIcon, RouteIcon } from '@/components/icons/Icons';
+import { JsonLd } from '@/components/json-ld/JsonLd';
+import { OpeningHours } from '@/components/opening-hours/OpeningHours';
+import { practice } from '@/config/practice';
+import { practiceJsonLd } from '@/config/structured-data';
 import Image from 'next/image';
 import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <div>
-      <AnnouncementPopup />
+    <>
+      <JsonLd data={practiceJsonLd} />
+      <div id="top" />
+      <AnnouncementBanner />
       <Header />
-      <div>
-        <section className={styles.container}>
-          <div className={styles.hero}>
-            <div className={styles.heroGradient} />
-            <div className={styles.heroContent}>
-              <div>
-                <h1>DAP De Beleyr</h1>
-                <p>Uw dierenartsenpraktijk gespecialiseerd in kleine huisdieren.</p>
-              </div>
-            </div>
-            <div className={styles.heroImage}>
-              <div>
-                <Image alt="DAP De Beleyr office" src="/assets/vet-office.jpeg" quality={100} fill objectFit="cover" />
-              </div>
-            </div>
-            <div className={styles.heroScroll}>
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Scroll down"
-              >
-                <title>Scroll down</title>
-                <path
-                  d="M3.85355 2.14645C3.65829 1.95118 3.34171 1.95118 3.14645 2.14645C2.95118 2.34171 2.95118 2.65829 3.14645 2.85355L7.14645 6.85355C7.34171 7.04882 7.65829 7.04882 7.85355 6.85355L11.8536 2.85355C12.0488 2.65829 12.0488 2.34171 11.8536 2.14645C11.6583 1.95118 11.3417 1.95118 11.1464 2.14645L7.5 5.79289L3.85355 2.14645ZM3.85355 8.14645C3.65829 7.95118 3.34171 7.95118 3.14645 8.14645C2.95118 8.34171 2.95118 8.65829 3.14645 8.85355L7.14645 12.8536C7.34171 13.0488 7.65829 13.0488 7.85355 12.8536L11.8536 8.85355C12.0488 8.65829 12.0488 8.34171 11.8536 8.14645C11.6583 7.95118 11.3417 7.95118 11.1464 8.14645L7.5 11.7929L3.85355 8.14645Z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                />
-              </svg>
+      <main id="inhoud" className={styles.main}>
+        <section className={styles.hero} aria-labelledby="hero-titel">
+          <div className={styles.heroText}>
+            <h1 id="hero-titel">DAP De Beleyr</h1>
+            <p>Uw dierenartsenpraktijk gespecialiseerd in kleine huisdieren.</p>
+            <div className={styles.actions}>
+              <a href={practice.phone.href} className={styles.primaryButton}>
+                <PhoneIcon />
+                Maak een afspraak
+              </a>
+              <a href="#openingsuren" className={styles.secondaryButton}>
+                Openingsuren
+              </a>
             </div>
           </div>
+          <div className={styles.heroImage}>
+            <Image
+              src="/assets/vet-office.jpeg"
+              alt="Het bord en de ingang van dierenartsenpraktijk DAP De Beleyr in Beveren"
+              fill
+              priority
+              quality={80}
+              sizes="(min-width: 1120px) 540px, (min-width: 768px) 48vw, 100vw"
+              className={styles.heroPhoto}
+            />
+          </div>
         </section>
-        <section className={styles.information}>
-          <Card title="Contact">
-            <p>
-              <strong className={styles.strong}>Adres:</strong> <br />
-              DAP De Beleyr <br />
-              Grote Baan 304A & 308 <br />
-              9120 Beveren
-            </p>
-            <p>
-              <strong className={styles.strong}>Telefoon:</strong> <br />
-              <a href="tel:+3237752026" className={styles.link}>
-                +32(0)3 775 20 26
-              </a>
-            </p>
-            <p>
-              <strong className={styles.strong}>GSM (zéér dringende gevallen):</strong> <br />
-              <a href="tel:+32475658433" className={styles.link}>
-                +32(0)475 65 84 33
-              </a>
-            </p>
-            <p>
-              <strong className={styles.strong}>E-mail:</strong> <br />
-              <a href="mailto:info@dapdebeleyr.be" className={styles.link}>
-                info@dapdebeleyr.be
-              </a>
-            </p>
-          </Card>
-          <Card title="Openingstijden">
-            <h3>Bij DAP De Beleyr werken we enkel op afspraak.</h3>
-            <div>
-              <strong className={styles.strong}>Telefonisch bereikbaar:</strong>
-              <h3>Maken van een afspraak</h3>
-              <p>Maandag - Dinsdag - Donderdag: 09u30 - 12u15 & 13u30 - 17u30</p>
-              <p>Woensdag - Vrijdag: 09u00 - 12u15 & 13u30 - 17u30 (Vrijdag tot 17u)</p>
-              <h3>Dierenartsen</h3>
-              <p>Maandag - Vrijdag: 11u00 - 12u15 & 16u00 - 17u00</p>
-            </div>
-            <div>
-              <strong className={styles.strong}>Ophalen van voeding en/of medicatie:</strong>
-              <p>Maandag - vrijdag: 10u45 - 12u15 & 13u30 - 18u30 (Vrijdag tot 17u30)</p>
-            </div>
-          </Card>
+
+        <section id="openingsuren" className={styles.section} aria-labelledby="openingsuren-titel">
+          <h2 id="openingsuren-titel">Openingstijden</h2>
+          <div className={styles.callout}>
+            <strong>Enkel op afspraak</strong>
+            <p>Bij DAP De Beleyr werken we enkel op afspraak.</p>
+          </div>
+          <OpeningHours />
         </section>
-      </div>
+
+        <section className={styles.emergency} aria-labelledby="spoed-titel">
+          <AlertIcon size={32} />
+          <div>
+            <h2 id="spoed-titel">GSM (zéér dringende gevallen)</h2>
+            <a href={practice.mobile.href} className={styles.emergencyButton}>
+              <PhoneIcon />
+              {practice.mobile.display}
+            </a>
+          </div>
+        </section>
+
+        <section id="contact" className={styles.section} aria-labelledby="contact-titel">
+          <h2 id="contact-titel">Contact</h2>
+          <div className={styles.contactGrid}>
+            <article className={styles.contactCard}>
+              <h3>Adres</h3>
+              <address>
+                DAP De Beleyr <br />
+                {practice.address.street} <br />
+                {practice.address.postalCode} {practice.address.city}
+              </address>
+              <a
+                href={practice.address.routeUrl}
+                className={styles.cardButton}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <RouteIcon />
+                Route plannen<span className={styles.srOnly}> (opent in een nieuw tabblad)</span>
+              </a>
+            </article>
+            <article className={styles.contactCard}>
+              <h3>Telefoon</h3>
+              <p>Voor het maken van een afspraak.</p>
+              <a href={practice.phone.href} className={styles.cardButton}>
+                <PhoneIcon />
+                {practice.phone.display}
+              </a>
+            </article>
+            <article className={styles.contactCard}>
+              <h3>E-mail</h3>
+              <p>{practice.email}</p>
+              <a href={`mailto:${practice.email}`} className={styles.cardButton}>
+                <MailIcon />
+                E-mail sturen
+              </a>
+            </article>
+          </div>
+        </section>
+      </main>
       <Footer />
-    </div>
+      <CallBar />
+    </>
   );
 }
